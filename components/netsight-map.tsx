@@ -16,6 +16,8 @@ export type MapFilter = { stations: string[]; zones: number[] } | null
 export type OperatorFilter = "All" | "Emarat" | "ENOC/EPPCO" | "ADNOC" | "Other"
 
 const stationColors: Record<string, string> = { Emarat: "#16834a", "ENOC/EPPCO": "#e8781c", ADNOC: "#2166ae", Other: "#808892" }
+const cartoBasemapKey = process.env.NEXT_PUBLIC_CARTO_BASEMAP_KEY?.trim()
+const cartoBasemapUrl = `https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png${cartoBasemapKey ? `?key=${encodeURIComponent(cartoBasemapKey)}` : ""}`
 type StationFacilitySummary = {
   station_id: string
   data_status: "available" | "available_zero" | "limited"
@@ -218,7 +220,7 @@ export function NetSightMap({
       <MapContainer center={[25.1, 55.22]} zoom={11} className="h-full w-full" zoomControl attributionControl>
         <MapResize />
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url={cartoBasemapUrl}
           subdomains="abcd"
           maxZoom={19}
           attribution="&copy; OpenStreetMap &copy; CARTO"

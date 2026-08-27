@@ -10,6 +10,10 @@ This repository is linked to a [v0](https://v0.app) project. You can continue de
 
 ## Getting Started
 
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_CARTO_BASEMAP_KEY` to
+your CARTO Basemaps API key. For deployed builds, configure the same environment
+variable in the hosting provider before building the application.
+
 First, run the development server:
 
 ```bash
